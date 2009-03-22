@@ -1,4 +1,9 @@
 === Nickel is a client for Natural Inputs
+=== Install
+  
+  gem install lzell-nickel
+
+=== Usage
 
 ==== A single occurrence
   n = Nickel.query "lunch tomorrow with maria"
