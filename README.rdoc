@@ -1,1 +1,4 @@
-write me
+===Usage:
+n = Nickel.query "lunch tomorrow with maria"
+puts n.message  # => lunch with maria
+puts n.occurrences.first.start_date  # => 20090323
