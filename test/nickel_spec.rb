@@ -59,6 +59,10 @@ describe "A weekly occurrence" do
     @occurs.interval.should == 1
   end
   
+  it "should start at 5pm" do 
+    @occurs.start_time.should == "17:00:00"
+  end
+  
   it "should have a start date" do 
     @occurs.start_date.should_not be_nil
   end
