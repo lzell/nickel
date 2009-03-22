@@ -1,3 +1,5 @@
+=== Nickel is a client for Natural Inputs
+
 ==== A single occurrence
   n = Nickel.query "lunch tomorrow with maria"
   n.message                       # => lunch with maria
