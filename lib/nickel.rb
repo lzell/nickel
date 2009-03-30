@@ -6,7 +6,7 @@ module Nickel
 
   def self.query(q)
     date_time = Time.now.strftime("%Y%m%dT%H%M%S")
-    url = "http://www.naturalinputs.com/query?q=#{URI.escape(q)}&t=#{date_time}"
+    url = "http://naturalinputs.com/query?q=#{URI.escape(q)}&t=#{date_time}"
     Mapricot.parser = :libxml
     Api::NaturalInputsResponse.new(:url => url)
   end
