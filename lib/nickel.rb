@@ -2,7 +2,7 @@ require 'rubygems'
 require 'mapricot'
 
 module Nickel
-  VERSION = "0.0.1"
+  VERSION = "0.0.2"
 
   def self.query(q)
     date_time = Time.now.strftime("%Y%m%dT%H%M%S")
