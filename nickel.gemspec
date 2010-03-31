@@ -1,11 +1,9 @@
 Gem::Specification.new do |s|
   s.name     = "nickel"
   s.version  = "0.0.2"
-  s.date     = "2009-03-30"
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.summary  = "Natural language date and time parsing"
   s.email    = "lzell11@gmail.com"
-  s.homepage = "naturalinputs.com"
+  s.homepage = "http://github.com/lzell/nickel"
 	s.description = "A client for naturalinputs.com.  Extracts date, time, and message information from naturally worded text."
   s.has_rdoc = true
   s.authors  = ["Lou Zell"]
@@ -18,5 +16,5 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rdoc_options = ["--main", "README.rdoc", "--title", "Nickel"]
   s.extra_rdoc_files = ["README.rdoc"]
-  s.add_dependency("lzell-mapricot")
+  s.add_dependency("mapricot")
 end
