@@ -5,3 +5,7 @@ Initial release!
 == 0.0.2 2009-03-30
 
 No www in request
+
+== 0.0.3 2010-04-02
+
+Able to set current time for query

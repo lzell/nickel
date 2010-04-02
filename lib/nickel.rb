@@ -2,11 +2,11 @@ require 'rubygems'
 require 'mapricot'
 
 module Nickel
-  VERSION = "0.0.2"
+  VERSION = "0.0.3"
 
-  def self.query(q)
-    date_time = Time.now.strftime("%Y%m%dT%H%M%S")
-    url = "http://naturalinputs.com/query?q=#{URI.escape(q)}&t=#{date_time}"
+  def self.query(q, current_time = Time.now)
+    raise InvalidDateTimeError unless [DateTime, Time].include?(current_time.class)
+    url = "http://naturalinputs.com/query?q=#{URI.escape(q)}&t=#{current_time.strftime("%Y%m%dT%H%M%S")}"
     Mapricot.parser = :libxml
     Api::NaturalInputsResponse.new(:url => url)
   end
@@ -31,5 +31,11 @@ module Nickel
       has_one   :date_of_month,   :integer
       has_one   :interval,        :integer
     end
+  end
+end
+
+class InvalidDateTimeError < StandardError
+  def message
+    "You must pass in a ruby DateTime or Time class object"
   end
 end

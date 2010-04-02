@@ -148,3 +148,18 @@ describe "Multiple occurrences" do
     @n.occurrences[1].start_time.should == "14:00:00"
   end
 end
+
+describe "Setting current time" do
+  
+  it "should occur on a date relative to the current time passed in" do
+    n = Nickel.query "lunch 3 days from now", DateTime.new(2009,05,28)
+    n.occurrences.first.start_date.should == "20090531"
+  end
+  
+  it "should raise an error if the current time argument is not a datetime or time object" do
+    lambda{ 
+      Nickel.query "lunch 3 days from now", Date.new(2009,05,28) 
+    }.should raise_error("You must pass in a ruby DateTime or Time class object")    
+  end
+  
+end

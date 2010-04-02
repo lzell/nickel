@@ -49,3 +49,9 @@
   n.occurrences[1].type           # => weekly
   n.occurrences[1].day_of_week    # => wed
   n.occurrences[1].start_time     # => 14:00:00
+
+==== Setting current time
+
+  n = Nickel.query "lunch 3 days from now", DateTime.new(2010,3,31)
+  n.message                       # => lunch
+  n.occurrences[0].start_date     # => 20100403
