@@ -1,5 +1,6 @@
-require 'rubygems'
 require 'mapricot'
+require 'open-uri'
+require 'date'
 
 module Nickel
   VERSION = "0.0.3"
@@ -8,7 +9,7 @@ module Nickel
     raise InvalidDateTimeError unless [DateTime, Time].include?(current_time.class)
     url = "http://naturalinputs.com/query?q=#{URI.escape(q)}&t=#{current_time.strftime("%Y%m%dT%H%M%S")}"
     Mapricot.parser = :libxml
-    Api::NaturalInputsResponse.new(:url => url)
+    Api::NaturalInputsResponse.new(open(url))
   end
 end
 
