@@ -1,5 +1,5 @@
-require 'rubygems'
-require 'spec'
+# Run with: 
+# ~/dev/nickel(master)$ rspec test/nickel_spec.rb
 require File.expand_path(File.dirname(__FILE__) + "/../lib/nickel")
 
 
@@ -161,5 +161,5 @@ describe "Setting current time" do
       Nickel.query "lunch 3 days from now", Date.new(2009,05,28) 
     }.should raise_error("You must pass in a ruby DateTime or Time class object")    
   end
-  
 end
+
