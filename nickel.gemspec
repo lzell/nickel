@@ -16,5 +16,4 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rdoc_options = ["--main", "README.rdoc", "--title", "Nickel"]
   s.extra_rdoc_files = ["README.rdoc"]
-  s.add_dependency("mapricot")
 end
