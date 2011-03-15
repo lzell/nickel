@@ -56,3 +56,15 @@
   n = Nickel.parse "lunch 3 days from now", DateTime.new(2010,3,31)
   n.message                       # => lunch
   n.occurrences[0].start_date     # => 20100403
+
+
+Running Tests
+=======
+$ rake test
+
+If you do not have RUBYOPT set: 
+$ RUBYOPT='rubygems' rake test
+
+
+Copyright (c) 2008-2011 Lou Zell, released under the MIT license
+
