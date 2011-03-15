@@ -1,4 +1,5 @@
-=== Nickel is a client for Natural Inputs
+=== Nickel extracts date, time, and message information from naturally worded text.
+
 === Install
   
   gem install nickel
@@ -6,19 +7,18 @@
 === Usage
 
 ==== A single occurrence
-  n = Nickel.query "lunch tomorrow with maria"
-  n.message                       # => lunch with maria
-  n.occurrences[0].type           # => single
-  n.occurrences[0].start_date     # => 20090323
+  n = Nickel.parse("use the force on july 1st at 9am", Time.now)
+  n.message                       #=> "use the force"
+  n.occurrences.first.start_date  #=> "20110701"
 
 ==== A daily occurrence
-  n = Nickel.query "wake up everyday at 11am"
+  n = Nickel.parse "wake up everyday at 11am"
   n.message                       # => wake up
   n.occurrences[0].type           # => daily
   n.occurrences[0].start_time     # => 11:00:00
   
 ==== A weekly occurrence
-  n = Nickel.query "guitar lessons every tuesday at 5pm"
+  n = Nickel.parse "guitar lessons every tuesday at 5pm"
   n.message                       # => guitar lessons
   n.occurrences[0].type           # => weekly
   n.occurrences[0].day_of_week    # => tue
@@ -26,7 +26,7 @@
   n.occurrences[0].start_time     # => 17:00:00
 
 ==== A day monthly occurrence
-  n = Nickel.query "drink specials on the second thursday of every month"
+  n = Nickel.parse "drink specials on the second thursday of every month"
   n.message                       # => drink specials
   n.occurrences[0].type           # => daymonthly
   n.occurrences[0].day_of_week    # => thu
@@ -34,14 +34,14 @@
   n.occurrences[0].interval       # => 1
   
 ==== A date monthly occurrence
-  n = Nickel.query "pay credit card every month on the 22nd"
+  n = Nickel.parse "pay credit card every month on the 22nd"
   n.message                       # => pay credit card
   n.occurrences[0].type           # => datemonthly
   n.occurrences[0].date_of_month  # => 22
   n.occurrences[0].interval       # => 1
 
 ==== Multiple occurrences
-  n = Nickel.query "band meeting every monday and wednesday at 2pm"
+  n = Nickel.parse "band meeting every monday and wednesday at 2pm"
   n.message                       # => band meeting
   n.occurrences[0].type           # => weekly
   n.occurrences[0].day_of_week    # => mon
@@ -52,6 +52,18 @@
 
 ==== Setting current time
 
-  n = Nickel.query "lunch 3 days from now", DateTime.new(2010,3,31)
+  n = Nickel.parse "lunch 3 days from now", DateTime.new(2010,3,31)
   n.message                       # => lunch
   n.occurrences[0].start_date     # => 20100403
+
+
+Running Tests
+=======
+$ rake test
+
+If you do not have RUBYOPT set: 
+$ RUBYOPT='rubygems' rake test
+
+
+Copyright (c) 2008-2011 Lou Zell, released under the MIT license
+

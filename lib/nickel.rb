@@ -1,42 +1,37 @@
-require 'mapricot'
-require 'open-uri'
+# Ruby Nickel Library 
+# Copyright (c) 2008-2011 Lou Zell, lzell11@gmail.com, http://hazelmade.com
+# MIT License [http://www.opensource.org/licenses/mit-license.php]
+#
+# Usage:
+# 
+#   Nickel.parse "some query", Time.local(2011, 7, 1)
+#
+# The second term is optional.
+
+require 'logger'
 require 'date'
 
+path = File.expand_path(File.join(File.dirname(__FILE__), 'nickel'))
+
+require File.join(path, 'ruby_ext', 'to_s2.rb')
+require File.join(path, 'ruby_ext', 'calling_method.rb')
+require File.join(path, 'zdate.rb')
+require File.join(path, 'ztime.rb')
+require File.join(path, 'instance_from_hash')
+require File.join(path, 'query_constants')
+require File.join(path, 'query')
+require File.join(path, 'construct')
+require File.join(path, 'construct_finder')
+require File.join(path, 'construct_interpreter')
+require File.join(path, 'occurrence')
+require File.join(path, 'nlp.rb')
+
 module Nickel
-  VERSION = "0.0.3"
-
-  def self.query(q, current_time = Time.now)
-    raise InvalidDateTimeError unless [DateTime, Time].include?(current_time.class)
-    url = "http://naturalinputs.com/query?q=#{URI.escape(q)}&t=#{current_time.strftime("%Y%m%dT%H%M%S")}"
-    Mapricot.parser = :libxml
-    Api::NaturalInputsResponse.new(open(url))
-  end
-end
-
-
-module Nickel
-  module Api
-    class NaturalInputsResponse < Mapricot::Base
-      has_one   :message
-      has_many  :occurrences, :xml
+  class << self
+    def parse(query, date_time = Time.now)
+      n = NLP.new(query, date_time)
+      n.parse
+      n
     end
-
-    class Occurrence < Mapricot::Base
-      has_one   :type
-      has_one   :start_date
-      has_one   :end_date
-      has_one   :start_time
-      has_one   :end_time
-      has_one   :day_of_week
-      has_one   :week_of_month,   :integer
-      has_one   :date_of_month,   :integer
-      has_one   :interval,        :integer
-    end
-  end
-end
-
-class InvalidDateTimeError < StandardError
-  def message
-    "You must pass in a ruby DateTime or Time class object"
-  end
+  end 
 end
