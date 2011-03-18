@@ -1,6 +1,7 @@
 require 'test/unit'
-require File.join(File.dirname(__FILE__), '..', 'lib', 'nickel', 'ruby_ext', 'to_s2.rb')
-require File.join(File.dirname(__FILE__), '..', 'lib', 'nickel', 'zdate.rb')
+
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'nickel', 'ruby_ext', 'to_s2.rb'))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'nickel', 'zdate.rb'))
 
 include Nickel
 

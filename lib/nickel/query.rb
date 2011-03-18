@@ -474,10 +474,10 @@ module Nickel
       if mdata = match(a_b)
         am_pm = mdata[2]
         case mdata[1].length                            # this may look a bit confusing, but all we are doing is interpreting    
-          when 1: hstr = "0" + mdata[1]                 # what the user meant based on the number of digits they provided
-          when 2: hstr = mdata[1]                                       # e.g. "11" means 11:00
-          when 3: hstr = "0" + mdata[1][0..0]; mstr = mdata[1][1..2]    # e.g. "530" means 5:30
-          when 4: hstr = mdata[1][0..1]; mstr = mdata[1][2..3]          # e.g. "1215" means 12:15
+          when 1 then hstr = "0" + mdata[1]                 # what the user meant based on the number of digits they provided
+          when 2 then hstr = mdata[1]                                       # e.g. "11" means 11:00
+          when 3 then hstr = "0" + mdata[1][0..0]; mstr = mdata[1][1..2]    # e.g. "530" means 5:30
+          when 4 then hstr = mdata[1][0..1]; mstr = mdata[1][2..3]          # e.g. "1215" means 12:15
         end
       elsif mdata = match(c_d_e)
         am_pm = mdata[3]
