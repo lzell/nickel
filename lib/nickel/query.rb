@@ -120,7 +120,7 @@ module Nickel
       nsub!(/next\s+occ?urr?[ae]nce(\s+is)?/,'start')
       nsub!(/next\s+date(\s+it)?(\s+occ?urr?s)?(\s+is)?/,'start')
       nsub!(/forever/,'repeats daily')
-      nsub!(/\bany(?:\s+)?day\b/,'every day')
+      nsub!(/\bany(?:\s*)day\b/,'every day')
       nsub!(/^anytime$/,'every day')  # user entered anytime by itself, not 'dayname anytime', caught next
       nsub!(/any(\s)?time|whenever/,'all day')
     end
@@ -377,8 +377,8 @@ module Nickel
     end
 
     def standardize_am_pm
-      nsub!(/([0-9])(?:\s+)?a\b/,'\1am')  # allows 5a as 5am
-      nsub!(/([0-9])(?:\s+)?p\b/,'\1pm')  # allows 5p as 5pm
+      nsub!(/([0-9])(?:\s*)a\b/,'\1am')  # allows 5a as 5am
+      nsub!(/([0-9])(?:\s*)p\b/,'\1pm')  # allows 5p as 5pm
       nsub!(/\s+am\b/,'am')  # removes any spaces before am, shouldn't I check for preceeding digits?
       nsub!(/\s+pm\b/,'pm')  # removes any spaces before pm, shouldn't I check for preceeding digits?
     end
@@ -631,7 +631,7 @@ module Nickel
       nsub!(/^(through|until)/,'today through')   # ^through  =>  today through
       nsub!(/every\s*(night|morning)/,'every day')
       nsub!(/tonight/,'today')
-      nsub!(/this(?:\s+)?morning/,'today')
+      nsub!(/this(?:\s*)morning/,'today')
       nsub!(/before\s+12pm/,'6am to 12pm')        # arbitrary
 
       # Handle 'THE' Cases
@@ -646,7 +646,7 @@ module Nickel
       # Every first sunday of the month and the last tuesday  =>  repeats monthly first sunday xxxxxxxxx repeats monthly last tuesday xxxxxxx
       nsub!(/every\s+#{WEEK_OF_MONTH}\s+#{DAY_OF_WEEK}\s+of\s+(?:the\s+)?month((?:.*)and\s+(?:the\s+)?#{WEEK_OF_MONTH}\s+#{DAY_OF_WEEK}(?:.*))/) do |m1,m2,m3|
         ret_str = " repeats monthly " + m1 + " " + m2 + " "
-        ret_str << m3.gsub(/and\s+(?:the\s+)?#{WEEK_OF_MONTH}\s+#{DAY_OF_WEEK}(?:\s+)?(?:of\s+)?(?:the\s+)?(?:month\s+)?/, ' repeats monthly \1 \2 ')
+        ret_str << m3.gsub(/and\s+(?:the\s+)?#{WEEK_OF_MONTH}\s+#{DAY_OF_WEEK}(?:\s*)(?:of\s+)?(?:the\s+)?(?:month\s+)?/, ' repeats monthly \1 \2 ')
       end
 
       # The x through the y of oct z  =>  10/x/z through 10/y/z
@@ -746,7 +746,7 @@ module Nickel
       # we are not going to do date calculations here anymore, so instead:
       # next friday to|until|through the following tuesday" --> next friday through tuesday
       # next friday and the following sunday --> next friday and sunday
-      nsub!(/next\s+#{DAY_OF_WEEK}\s+(to|until|through|and)\s+(?:the\s+)?(?:following|next)?(?:\s+)?#{DAY_OF_WEEK}/) do |m1,m2,m3|
+      nsub!(/next\s+#{DAY_OF_WEEK}\s+(to|until|through|and)\s+(?:the\s+)?(?:following|next)?(?:\s*)#{DAY_OF_WEEK}/) do |m1,m2,m3|
         connector = (m2 =~ /and/ ? ' ' : ' through ')
         "next " + m1 + connector + m3
       end
@@ -757,7 +757,7 @@ module Nickel
       # No longer performing date calculation
       # this friday and the following monday --> fri mon
       # this friday through the following tuesday --> fri through tues
-      nsub!(/(?:this\s+)?#{DAY_OF_WEEK}\s+(to|until|through|and)\s+(?:the\s+)?(?:this|following)(?:\s+)?#{DAY_OF_WEEK}/) do |m1,m2,m3|
+      nsub!(/(?:this\s+)?#{DAY_OF_WEEK}\s+(to|until|through|and)\s+(?:the\s+)?(?:this|following)(?:\s*)#{DAY_OF_WEEK}/) do |m1,m2,m3|
         connector = (m2 =~ /and/ ? ' ' : ' through ')
         m1 + connector + m3
       end
@@ -769,7 +769,7 @@ module Nickel
       nsub!(/(#{DAY_OF_WEEK}\s+and\s+#{DAY_OF_WEEK})(?:\s+and)?/,'\2 \3')
       
       # "mon wed every week" --> every mon wed
-      nsub!(/((#{DAY_OF_WEEK}(?:\s+)?){1,7})(?:of\s+)?(?:every|each)(\s+other)?\s+week/,'every \4 \1')
+      nsub!(/((#{DAY_OF_WEEK}(?:\s*)){1,7})(?:of\s+)?(?:every|each)(\s+other)?\s+week/,'every \4 \1')
       
       # "every 2|3 weeks" --> every 2nd|3rd week
       nsub!(/(?:repeats\s+)?every\s+(2|3)\s+weeks/) {|m1| "every " + m1.to_i.ordinalize + " week"}
@@ -998,7 +998,7 @@ module Nickel
       nsub!(/in\s+(an?|[0-9]+)\s+(hour|minute)s?/, '\1 \2 from now')
       
       # Now only
-      nsub!(/^(?:\s+)?(?:right\s+)?now(?:\s+)?$/, '0 minutes from now')
+      nsub!(/^(?:\s*)(?:right\s+)?now(?:\s*)$/, '0 minutes from now')
       
       # "a week/month from yesterday|tomorrow" --> 1 week from yesterday|tomorrow
       nsub!(/(?:(?:a|1)\s+)?(week|month)\s+from\s+(yesterday|tomorrow)/,'1 \1 from \2')
@@ -1047,7 +1047,7 @@ module Nickel
       # "on the last day of nov" --> "last day nov"
       nsub!(/(?:\bon\s+)?(?:the\s+)?last\s+day\s+(?:of\s+)?(?:in\s+)?#{MONTH_OF_YEAR}/,'last day \1')
       # "on the 1st|last day of this|the month" --> "1st|last day this month"
-      nsub!(/(?:\bon\s+)?(?:the\s+)?(1st|last)\s+day\s+(?:of\s+)?(?:this|the)?(?:\s+)?month/,'\1 day this month')
+      nsub!(/(?:\bon\s+)?(?:the\s+)?(1st|last)\s+day\s+(?:of\s+)?(?:this|the)?(?:\s*)month/,'\1 day this month')
       # "on the 1st|last day of next month" --> "1st|last day next month"
       nsub!(/(?:\bon\s+)?(?:the\s+)?(1st|last)\s+day\s+(?:of\s+)?next\s+month/,'\1 day next month')
       
