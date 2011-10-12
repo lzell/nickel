@@ -277,7 +277,7 @@ module Nickel
         day_array << ZDate.days_of_week.index(@components[@pos+j])
         j += 1
       end
-      @constructs << RecurrenceConstruct.new(:repeats => :threeweekly, :repeats_on => day_array, :comp_start => @pos, :comp_end => @pos += (j - i), :found_in => method_name)
+      @constructs << RecurrenceConstruct.new(:repeats => :threeweekly, :repeats_on => day_array, :comp_start => @pos, :comp_end => @pos += (j - 1), :found_in => method_name)
     end
     
     def match_every_3rd_day
