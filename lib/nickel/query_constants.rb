@@ -13,8 +13,8 @@ module Nickel
     DATE_DD_WITHOUT_SUFFIX_NB        = %r{\b(?:0?[1-9]|[12][0-9]|3[01])\b}
     DATE_DD_WITH_SUFFIX_NB_ON_SUFFIX = %r{\b(0?[1-9]|[12][0-9]|3[01])(?:st|nd|rd|th)\b}
     DATE_MM_SLASH_DD                 = %r{\b(?:0?[1-9]|[1][0-2])\/(?:0?[1-9]|[12][0-9]|3[01])}
-    DAY_OF_WEEK                      = %r{\b(mon|tue|wed|thu|fri|sat|sun)\b}
-    DAY_OF_WEEK_NB                   = %r{\b(?:mon|tue|wed|thu|fri|sat|sun)\b}        #no backreference
+    DAY_OF_WEEK                      = %r{\b(mon|tue|wed|thu|thurs|fri|sat|sun)\b}
+    DAY_OF_WEEK_NB                   = %r{\b(?:mon|tue|wed|thu|thurs|fri|sat|sun)\b}        #no backreference
     MONTH_OF_YEAR                    = %r{\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\b}
     MONTH_OF_YEAR_NB                 = %r{\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\b}
     TIME_24HR                        = %r{[01]?[0-9]|2[0-3]:[0-5][0-9]}
