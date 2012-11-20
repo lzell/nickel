@@ -141,7 +141,7 @@ module Nickel
       nsub!(/thurdsay/,'thu')
       nsub!(/thursady/,'thu')
       nsub!(/\bthurd?\b/,'thu')
-      nsub!(/\bthurd?\b/,'thu')
+      nsub!(/\bthurs?d?\b/,'thu')
       nsub!(/fridays/,'every fri')
       nsub!(/firdays/,'every fri')
       nsub!(/friday/,'fri')
