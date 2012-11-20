@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name     = "nickel"
-  s.version  = "0.0.5"
+  s.version  = "0.0.6"
   s.summary  = "Natural language date, time, and message parsing."
   s.email    = "lzell11@gmail.com"
   s.homepage = "http://github.com/lzell/nickel"
