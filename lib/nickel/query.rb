@@ -725,6 +725,12 @@ module Nickel
         month_str = (ZDate.months_of_year.index(m1) + 1).to_s                                                                                        
         m2.gsub(/(and|the)/,'').gsub(/#{DATE_DD_NB_ON_SUFFIX}/) {month_str + '/' + $1}  # that $1 is from the nested match!
       end
+
+      # Apr 29, 5 - 8pm
+      nsub!(/#{MONTH_OF_YEAR}(?:\s)+#{DATE_DD_WITHOUT_SUFFIX}(?:,)?(?:\s)+(#{TIME} through #{TIME})/) do |m1, m2, m3|
+        month_str = (ZDate.months_of_year.index(m1) + 1).to_s                                                                                        
+        "#{month_str}/#{m2} #{m3}"
+      end 
       
       # jan 4 2-3 has to be modified, but
       # jan 24 through jan 26 cannot!

@@ -700,6 +700,16 @@ class TestDates < Test::Unit::TestCase
     assert_nlp NLP.new("october 2nd, 2009", Time.local(2008, 1, 01)), [Occurrence.new(:type => :single, :start_date => ZDate.new("20091002"))]
   end
 
+  def test__april_29_5_to_8_pm
+    now = Time.local(2008, 3, 30)
+    assert_nlp NLP.new("April 29, 5-8pm", now), 
+      [Occurrence.new(
+        :type => :single, 
+        :start_date => ZDate.new("20080429"), 
+        :start_time => ZTime.new("5", :pm),
+        :end_time => ZTime.new("8", :pm))]
+  end
+
   def test__the_first_of_each_month
     assert_nlp NLP.new("the first of each month", Time.local(2008, 1, 01)), 
                [
