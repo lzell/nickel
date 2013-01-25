@@ -355,7 +355,7 @@ class TestDates < Test::Unit::TestCase
                                                                                   :start_date => ZDate.new("20081002"),
                                                                                   :end_date => ZDate.new("20081005"),
                                                                                   :interval => 1) ]
-                                                                                  
+
     assert_nlp  NLP.new("10/2 to 10/5", now), [ Occurrence.new(:type => :daily,
                                                                :start_date => ZDate.new("20081002"),
                                                                :end_date => ZDate.new("20081005"),
@@ -400,6 +400,14 @@ class TestDates < Test::Unit::TestCase
                                                                                           :start_time => ZTime.new("21"), 
                                                                                           :end_time => ZTime.new("05")) ]
   end
+
+	def test__january_1st_through_february_15th
+    now = Time.local(2008, 1, 18)
+		assert_nlp  NLP.new("january 1 - february 15", now), [ Occurrence.new(:type => :daily,
+																															:start_date => ZDate.new("20080101"), 
+																															:end_date => ZDate.new("20080215"),
+																															:interval => 1) ]
+	end
 
   def test__every_monday
     assert_nlp  NLP.new("every monday", Time.local(2008, 9, 18)), [Occurrence.new(:type => :weekly,
