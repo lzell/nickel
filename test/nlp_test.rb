@@ -402,10 +402,26 @@ class TestDates < Test::Unit::TestCase
   end
 
 	def test__january_1st_through_february_15th
-    now = Time.local(2008, 1, 18)
+    now = Time.local(2013, 1, 25)
 		assert_nlp  NLP.new("january 1 - february 15", now), [ Occurrence.new(:type => :daily,
-																															:start_date => ZDate.new("20080101"), 
-																															:end_date => ZDate.new("20080215"),
+																															:start_date => ZDate.new("20130101"), 
+																															:end_date => ZDate.new("20130215"),
+																															:interval => 1) ]
+	end
+
+	def test__tuesday_january_1st_through_friday_february_15th_2013
+    now = Time.local(2008, 1, 25)
+		assert_nlp  NLP.new("tuesday, january 1 - friday, february 15, 2013", now), [ Occurrence.new(:type => :daily,
+																															:start_date => ZDate.new("20130101"), 
+																															:end_date => ZDate.new("20130215"),
+																															:interval => 1) ]
+	end
+
+	def test__tuesday_january_1st_2013_through_friday_february_15th_2013
+    now = Time.local(2008, 1, 25)
+		assert_nlp  NLP.new("tuesday, january 1, 2013 - friday, february 15, 2013", now), [ Occurrence.new(:type => :daily,
+																															:start_date => ZDate.new("20130101"), 
+																															:end_date => ZDate.new("20130215"),
 																															:interval => 1) ]
 	end
 
