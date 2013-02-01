@@ -664,6 +664,20 @@ module Nickel
         (ZDate.months_of_year.index(m1) + 1).to_s + '/' + m2 + ' through ' + (ZDate.months_of_year.index(m3) + 1).to_s + '/' + m4
 			end
 
+			#Tuesday, january 1 - friday, february 15, 2013
+			nsub!(/(?:#{DAY_OF_WEEK})?(?:[\s,]+)#{MONTH_OF_YEAR}(?:[\s,]+)#{DATE_DD}\s+(?:through|to|until)\s+(?:#{DAY_OF_WEEK})?(?:[\s,]+)#{MONTH_OF_YEAR}(?:[\s,]+)#{DATE_DD}(?:[\s,]+)#{YEAR}/) do |m1,m2,m3,m4,m5,m6,m7|
+				if m7.nil?
+        	(ZDate.months_of_year.index(m2) + 1).to_s + '/' + m3 + ' through ' + (ZDate.months_of_year.index(m5) + 1).to_s + '/' + m6
+				else
+        	(ZDate.months_of_year.index(m2) + 1).to_s + '/' + m3 + '/' + m7 + ' through ' + (ZDate.months_of_year.index(m5) + 1).to_s + '/' + m6 + "/" + m7
+				end
+			end
+
+			#Tuesday, january 1 2013 - friday, february 15, 2013
+			nsub!(/(?:#{DAY_OF_WEEK})?(?:[\s,]+)#{MONTH_OF_YEAR}(?:[\s,]+)#{DATE_DD}\s+#{YEAR}\s+(?:through|to|until)\s+(?:#{DAY_OF_WEEK})?(?:[\s,]+)#{MONTH_OF_YEAR}(?:[\s,]+)#{DATE_DD}(?:[\s,]+)#{YEAR}/) do |m1,m2,m3,m4,m5,m6,m7,m8|
+        	(ZDate.months_of_year.index(m2) + 1).to_s + '/' + m3 + '/' + m4 + ' through ' + (ZDate.months_of_year.index(m6) + 1).to_s + '/' + m7 + "/" + m8
+			end
+
       # Monthname x through y
       nsub!(/#{MONTH_OF_YEAR}\s+(?:the\s+)?#{DATE_DD_NB_ON_SUFFIX}\s+(?:of\s+)?(?:#{YEAR}\s+)?(?:through|to|until)\s+(?:the\s+)?#{DATE_DD_NB_ON_SUFFIX}(?:\s+of)?(?:\s+#{YEAR})?/) do |m1,m2,m3,m4,m5|
         if m3  # $3 holds first occurrence of year
