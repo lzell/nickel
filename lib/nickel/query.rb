@@ -661,15 +661,15 @@ module Nickel
 
 			# January 1 - February 15
       nsub!(/#{MONTH_OF_YEAR}\s+#{DATE_DD_NB_ON_SUFFIX}\s+(?:through|to|until)\s+#{MONTH_OF_YEAR}\s#{DATE_DD_NB_ON_SUFFIX}/) do |m1,m2,m3,m4|
-        (ZDate.months_of_year.index(m1) + 1).to_s + '/' + m2 + ' through ' + (ZDate.months_of_year.index(m3) + 1).to_s + '/' + m4
+        (ZDate.months_of_year.index(m1) + 1).to_s + '/' + m2.gsub(/(st|nd|rd|th)/, "") + ' through ' + (ZDate.months_of_year.index(m3) + 1).to_s + '/' + m4.gsub(/(st|nd|rd|th)/, "")
 			end
 
 			#Tuesday, january 1 - friday, february 15, 2013
 			nsub!(/(?:#{DAY_OF_WEEK})?(?:[\s,]+)#{MONTH_OF_YEAR}(?:[\s,]+)#{DATE_DD}\s+(?:through|to|until)\s+(?:#{DAY_OF_WEEK})?(?:[\s,]+)#{MONTH_OF_YEAR}(?:[\s,]+)#{DATE_DD}(?:[\s,]+)#{YEAR}/) do |m1,m2,m3,m4,m5,m6,m7|
 				if m7.nil?
-        	(ZDate.months_of_year.index(m2) + 1).to_s + '/' + m3 + ' through ' + (ZDate.months_of_year.index(m5) + 1).to_s + '/' + m6
+        	(ZDate.months_of_year.index(m2) + 1).to_s + '/' + m3.gsub(/(st|nd|rd|th)/, "") + ' through ' + (ZDate.months_of_year.index(m5) + 1).to_s + '/' + m6
 				else
-        	(ZDate.months_of_year.index(m2) + 1).to_s + '/' + m3 + '/' + m7 + ' through ' + (ZDate.months_of_year.index(m5) + 1).to_s + '/' + m6 + "/" + m7
+        	(ZDate.months_of_year.index(m2) + 1).to_s + '/' + m3.gsub(/(st|nd|rd|th)/, "") + '/' + m7 + ' through ' + (ZDate.months_of_year.index(m5) + 1).to_s + '/' + m6.gsub(/(st|nd|rd|th)/, "") + "/" + m7
 				end
 			end
 
