@@ -433,15 +433,14 @@ class TestDates < Test::Unit::TestCase
 																															:end_date => ZDate.new("20130215"),
 																															:interval => 1) ]
 	end
-	
-	#Fail here!
-  #def test__every_monday_and_wednesday
-  #  assert_nlp  NLP.new("every monday and wednesday", Time.local(2008, 9, 18)), 
-  #              [
-  #                Occurrence.new(:type => :weekly, :day_of_week => 0, :interval => 1, :start_date => ZDate.new("20080922")),
-  #                Occurrence.new(:type => :weekly, :day_of_week => 2, :interval => 1, :start_date => ZDate.new("20080924"))
-  #              ]
-  #end
+
+  def test__every_monday_and_wednesday
+    assert_nlp  NLP.new("every monday and wednesday", Time.local(2008, 9, 18)),
+                [
+                  Occurrence.new(:type => :weekly, :day_of_week => 0, :interval => 1, :start_date => ZDate.new("20080922")),
+                  Occurrence.new(:type => :weekly, :day_of_week => 2, :interval => 1, :start_date => ZDate.new("20080924"))
+                ]
+  end
 
   def test__every_other_monday_and_wednesday
     assert_nlp  NLP.new("every other monday and wednesday", Time.local(2008, 9, 18)), 
