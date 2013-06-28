@@ -681,9 +681,9 @@ module Nickel
       # Monthname x through y
       nsub!(/#{MONTH_OF_YEAR}\s+(?:the\s+)?#{DATE_DD_NB_ON_SUFFIX}\s+(?:of\s+)?(?:#{YEAR}\s+)?(?:through|to|until)\s+(?:the\s+)?#{DATE_DD_NB_ON_SUFFIX}(?:\s+of)?(?:\s+#{YEAR})?/) do |m1,m2,m3,m4,m5|
         if m3  # $3 holds first occurrence of year
-          (ZDate.months_of_year.index(m1) + 1).to_s + '/' + m2 + '/' + m3 +' through ' + (ZDate.months_of_year.index(m1) + 1).to_s + '/' + m4 + '/' + m3
+          (ZDate.months_of_year.index(m1) + 1).to_s + '/' + m2 + '/' + m3 + ' through ' + (ZDate.months_of_year.index(m1) + 1).to_s + '/' + m4 + '/' + m3
         elsif m5 # $5 holds second occurrence of year
-          (ZDate.months_of_year.index(m1) + 1).to_s + '/' + m2 + '/' + m5 +' through ' + (ZDate.months_of_year.index(m1) + 1).to_s + '/' + m4 + '/' + m5
+          (ZDate.months_of_year.index(m1) + 1).to_s + '/' + m2 + '/' + m5 + ' through ' + (ZDate.months_of_year.index(m1) + 1).to_s + '/' + m4 + '/' + m5
         else
           (ZDate.months_of_year.index(m1) + 1).to_s + '/' + m2 + ' through ' + (ZDate.months_of_year.index(m1) + 1).to_s + '/' + m4
         end
