@@ -21,7 +21,7 @@
   n = Nickel.parse "guitar lessons every tuesday at 5pm"
   n.message                       # => guitar lessons
   n.occurrences[0].type           # => weekly
-  n.occurrences[0].day_of_week    # => tue
+  n.occurrences[0].day_of_week    # => 1
   n.occurrences[0].interval       # => 1
   n.occurrences[0].start_time     # => 17:00:00
 
@@ -29,7 +29,7 @@
   n = Nickel.parse "drink specials on the second thursday of every month"
   n.message                       # => drink specials
   n.occurrences[0].type           # => daymonthly
-  n.occurrences[0].day_of_week    # => thu
+  n.occurrences[0].day_of_week    # => 4
   n.occurrences[0].week_of_month  # => 2
   n.occurrences[0].interval       # => 1
   
@@ -44,10 +44,10 @@
   n = Nickel.parse "band meeting every monday and wednesday at 2pm"
   n.message                       # => band meeting
   n.occurrences[0].type           # => weekly
-  n.occurrences[0].day_of_week    # => mon
+  n.occurrences[0].day_of_week    # => 0
   n.occurrences[0].start_time     # => 14:00:00
   n.occurrences[1].type           # => weekly
-  n.occurrences[1].day_of_week    # => wed
+  n.occurrences[1].day_of_week    # => 2
   n.occurrences[1].start_time     # => 14:00:00
 
 ==== Setting current time
