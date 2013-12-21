@@ -41,4 +41,9 @@ class ZDateTest < Test::Unit::TestCase
     assert_equal 5, d2.diff_in_days_to_this(ZDate::MON)
     assert_equal 6, d2.diff_in_days_to_this(ZDate::TUE)
   end
+
+  def test_to_date
+    date = ZDate.new('20090927')
+    assert_equal Date.new(2009, 9, 27), date.to_date
+  end
 end
