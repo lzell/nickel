@@ -12,7 +12,7 @@ describe "A single date" do
   
   it "should have a start date" do 
     @n.occurrences.size.should == 1
-    @n.occurrences.first.start_date.date.should == "20091015"
+    @n.occurrences.first.start_date.should == Date.new(2009, 10, 15)
   end
 end
 
@@ -31,7 +31,7 @@ describe "A daily occurrence" do
   end
   
   it "should have a start time" do 
-    @occurs.start_time.time.should == "110000"
+    @occurs.start_time.to_s.should == "11:00:00"
   end
 end
 
@@ -60,7 +60,7 @@ describe "A weekly occurrence" do
   end
   
   it "should start at 5pm" do 
-    @occurs.start_time.time.should == "170000"
+    @occurs.start_time.to_s.should == "17:00:00"
   end
   
   it "should have a start date" do 
@@ -144,8 +144,8 @@ describe "Multiple occurrences" do
   end
   
   it "should occur at 2pm on both days" do 
-    @n.occurrences[0].start_time.time.should == "140000"
-    @n.occurrences[1].start_time.time.should == "140000"
+    @n.occurrences[0].start_time.to_s.should == "14:00:00"
+    @n.occurrences[1].start_time.to_s.should == "14:00:00"
   end
 end
 
@@ -153,7 +153,7 @@ describe "Setting current time" do
   
   it "should occur on a date relative to the current time passed in" do
     n = Nickel.parse "lunch 3 days from now", DateTime.new(2009,05,28)
-    n.occurrences.first.start_date.date.should == "20090531"
+    n.occurrences.first.start_date.should == Date.new(2009, 5, 31)
   end
   
   it "should raise an error if the current time argument is not a datetime or time object" do
